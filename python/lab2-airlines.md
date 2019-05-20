@@ -73,7 +73,7 @@ Living in Chicago, IL, what are the farthest 10 destinations that you could fly 
 flights.filter(lambda f: f['OriginCityName'] == "Chicago, IL")      \
        .map(lambda f: (f['DestCityName'], float(f['Distance'])))    \
        .distinct()                                                  \
-       .sortBy(lambda (dest, dist): -dist)                          \
+       .sortBy(lambda tup: -tup[1])                                 \
        .take(10)
 ```
 
@@ -87,7 +87,7 @@ flights.filter(lambda flight: flight['OriginCityName'] == "New York, NY" and
                               flight['ArrDelay'] != '')                       \
        .map(lambda flight: (flight['Carrier'], float(flight['ArrDelay'])))    \
        .reduceByKey(lambda a, b: a + b)                                       \
-       .sortBy(lambda (carrier, delay): delay)                                \
+       .sortBy(lambda tup: -tup[1])                                           \
        .first()
 ```
 
