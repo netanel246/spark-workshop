@@ -84,7 +84,7 @@ Suppose you're in New York, NY and are contemplating direct flights to San Franc
 ```python
 flights.filter(lambda flight: flight['OriginCityName'] == "New York, NY" and
                               flight['DestCityName'] == "San Francisco, CA" and
-                              flight['ArrDelay'] != '')                       \
+                              flight['ArrDelay'] != '' and flight['ArrDelay'] != None)                       \
        .map(lambda flight: (flight['Carrier'], float(flight['ArrDelay'])))    \
        .reduceByKey(lambda a, b: a + b)                                       \
        .sortBy(lambda tup: -tup[1])                                           \
