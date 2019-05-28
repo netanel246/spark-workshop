@@ -82,7 +82,7 @@ Given a collection of items, the `map`, `filter`, `reduce` and other functions w
 
 * Given a list of numbers, use `map` to raise each number to the power of 2.
 
-* Given a list of words, use `reduce` to find the average word length.
+* Given a list of words, use `reduce` to find the average word length(we need to import it from functools - `from functools import reduce`)
 
 * Use `map` and `reduce` to solve [problem 6](https://projecteuler.net/problem=6) from Project Euler, which states:
 
@@ -91,6 +91,7 @@ Given a collection of items, the `map`, `filter`, `reduce` and other functions w
 **Solution**:
 
 ```python
+from functools import reduce
 def evens(numbers):
     return filter(lambda n: n % 2 == 0, numbers)
 
@@ -106,7 +107,7 @@ def problem6():
         return reduce(lambda a, b: a + b, numbers)      # or use built-in sum()
     def square(n):
         return n * n
-    return _sum(squares(xrange(1, 100))) - square(_sum(xrange(1, 100)))
+    return _sum(squares(range(1, 100))) - square(_sum(range(1, 100)))
 ```
 
 ___
