@@ -9,7 +9,7 @@ ___
 Spark 2.X ships with a built-in csv reader for the DataFrame API. Because DataFrame is an abstraction over the RDD API, we will read the airline-delays.csv file as DataFrame while using the underneath RDD Object. In the next slides, we will talk more deeply about the DataFrame API, but for now, just use these lines in order to read the file: 
 
 ```python
-flightsDf = spark.read.option("header", "true").csv("file:////home/ubuntu/data/airline-delays.csv")
+flightsDf = spark.read.option("header", "true").csv("/FileStore/tables/spark-workshop/airline_delays-98bb4.csv")
 flights = flightsDf.rdd
 ```
 
@@ -17,11 +17,11 @@ ___
 
 #### Task 2: Inspecting the Data
 
-This dataset ships with two files (in the `~/data` directory, if you are using the instructor-provided appliance). First, the `airline-format.html` file contains a brief description of the dataset, and the various data fields. For example, the `ArrDelay` field is the flight's arrival delay, in minutes. Second, the `airline-delays.csv` file is a comma-separated collection of flight records, one record per line.
+This dataset ships with two files. First, the `airline-format.html` file contains a brief description of the dataset, and the various data fields. For example, the `ArrDelay` field is the flight's arrival delay, in minutes. Second, the `airline-delays.csv` file is a comma-separated collection of flight records, one record per line.
 
 Inspect the fields described in the `airline-format.html` file. Make a note of fields that describe the flight, its origin and destination airports, and any delays encountered on departure and arrival.
 
-Let's start by counting the number of records in our dataset. Run the following command in a terminal window:
+Let's start by counting the number of records in our dataset. Run the following command in the notebook:
 
 ```
 flights.count()
