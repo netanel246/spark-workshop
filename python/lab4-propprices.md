@@ -6,10 +6,10 @@ ___
 
 #### Task 1: Inspecting the Data
 
-As always, we begin by inspecting the data, which is in the `~/data/prop-prices.csv` file. Run the following command to take a look at some of the entries:
+As always, we begin by inspecting the data. Run the following command to take a look at some of the entries:
 
 ```
-head ~/data/prop-prices.csv
+%fs head /FileStore/tables/prop-prices.csv
 ```
 
 Note that this time, the CSV file does not have headers. To determine which fields are available, consult the [guidance page](https://www.gov.uk/guidance/about-the-price-paid-data).
@@ -41,10 +41,10 @@ First, let's do some basic analysis on the data. Find how many records we have p
 **Solution**:
 
 ```python
-spark.sql("""select   year(date), count(*)
+display(spark.sql("""select   year(date), count(*)
                   from     properties
                   group by year(date)
-                  order by year(date)""").collect()
+                  order by year(date)"""))
 ```
 
 All right, so everyone knows that properties in London are expensive. Find the average property price by county, and print the top 10 most expensive counties.
@@ -64,32 +64,25 @@ Is there any trend for property sales during the year? Find the average property
 **Solution**:
 
 ```python
-spark.sql("""select   year(date) as yr, month(date) as mth, avg(price)
+display(spark.sql("""select   county, avg(price)
                   from     properties
-                  where    county='GREATER LONDON'
-                  and      year(date) >= 2015
-                  group by year(date), month(date)
-                  order by year(date), month(date)""").collect()
+                  group by county
+                  order by avg(price) desc
+                  limit    10"""))
 ```
+Let's plot the property price changes, month-over-month, across the entire dataset.
 
-Bonus: use the Python `matplotlib` module to plot the property price changes month-over-month across the entire dataset.
-
-> The `matplotlib` module is installed in the instructor-provided appliance. However, there is no X environment, so you will not be able to view the actual plot. For your own system, follow the [installation instructions](http://matplotlib.org/users/installing.html).
+> You can do it by clicking the Bar Chart -> Plot Options and configure the plot Bar chart, after you display the results 
 
 **Solution**:
 
 ```python
-monthPrices = spark.sql("""select   year(date), month(date), avg(price)
-                                from     properties
-                                group by year(date), month(date)
-                                order by year(date), month(date)""").collect()
-import matplotlib.pyplot as plt
-values = map(lambda row: row[2], monthPrices)
-plt.rcdefaults()
-plt.scatter(range(0,len(monthPrices)), list(values))
-plt.show()
+display(spark.sql("""select   year(date), month(date), avg(price)
+                     from     properties
+                     group by year(date), month(date)
+                     order by year(date), month(date)"""))
 ```
-
+Bar Chart -> Plot Options -> Keys: year, Series groupings: month, Values: avg(price)
 ___
 
 #### Discussion
