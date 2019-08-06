@@ -2,56 +2,41 @@
 
 The purpose of this lab is to make sure you are sufficiently acquainted with Python to succeed in the rest of the labs. If Python is one of your primary language, this should be smooth sailing; otherwise, please make sure you complete these tasks before moving on to the next labs.
 
-This lab assumes that you have Python 3.6+ installed on your system. If you're using the instructor-provided appliance, you're all set. Otherwise, please make sure that Python is installed and is in the path, so you can type `python` to launch it from a terminal window.
+This lab assumes that you run with Python 3 on Databricks(Default option).
 
 ___
 
-#### Task 1: Experimenting with the Python REPL
+#### Task 1: Experimenting with the Python on Databricks
 
-Open a terminal window and run `python`. An interactive prompt similar to the following should appear:
+Open a python notebook on Databricks.  
 
-```
-Python 3.6.0 |Anaconda 4.3.1 (64-bit)| (default, Dec 23 2016, 12:22:00) 
-[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> 
-```
+> Run the code inside the cell using Ctrl + Enter
+> Shift + Enter will run the code inside the cell and open a new cell
 
-This is the Python REPL -- Read, Eval, Print Loop environment. Try some basic commands to make sure everything works (do not type the `>>>` prompt):
+Try some of the following commands:
 
 ```
->>> 2 + 2
-4
->>> print("Hello, REPL")
-Hello, REPL
->>> exit()
-```
+2 + 2
+Out[5]: 4
 
-Instead of `exit()`, you can also type Ctrl+D to leave the REPL environment.
+print("Hello, Databricks")
+Hello, Databricks
+```
 
 ___
 
 #### Task 2: Implementing Python Functions
 
-Create a new file called `functions.py`. Use the following template so that when the file is executed directly, the `run` function will be called:
+You can define function using the ```def``` keyword:
 
 ```python
-def run():
-    print("Hey there!")
+def run(name):
+    print("Hey " + name)
 
-if __name__ == "__main__":
-    run()
+run("databricks")
 ```
 
-> Which editor should you use in the appliance? If you want to get into the spirit of the course, you could use `vim`, but if you're looking for something more user-friendly, use `nano` or the built-in web-based editor.
-
-To make sure everything's fine so far, run your Python program from a terminal window:
-
-```
-python functions.py
-```
-
-You should see "Hey there!" printed out.
+You should see "Hey databricks" printed out.
 
 Next, implement a function called `wordcount` that takes a list of strings, and produces a dict with the number of times each string appears. Here is an example of its invocation and expected output:
 
@@ -60,7 +45,7 @@ print(wordcount(["the", "fox", "jumped", "over", "the", "dog"]))
 # Expecting { 'the': 2, 'fox': 1 }, and so on
 ```
 
-You might find dict's `setdefault` method useful. To find out how it works, run `help(dict.setdefault)` from the Python REPL. Alternatively, to test whether a key is present in a dictionary, use `if key in dict ...`.
+You might find dict's `setdefault` method useful. To find out how it works, run `help(dict.setdefault)` from the notebook. Alternatively, to test whether a key is present in a dictionary, use `if key in dict ...`.
 
 **Solution**:
 
